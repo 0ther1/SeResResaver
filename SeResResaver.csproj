@@ -1,0 +1,65 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>WinExe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UseWPF>true</UseWPF>
+    <ApplicationIcon>Resources\Icons\AppIcon.ico</ApplicationIcon>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Resources\Icons\AddFile.png" />
+    <None Remove="Resources\Icons\AddFolder.png" />
+    <None Remove="Resources\Icons\AppIcon.ico" />
+    <None Remove="Resources\Icons\AppIcon.png" />
+    <None Remove="Resources\Icons\Check.png" />
+    <None Remove="Resources\Icons\ClearFilter.png" />
+    <None Remove="Resources\Icons\Rename.png" />
+    <None Remove="Resources\Icons\Uncheck.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BouncyCastle.Cryptography" Version="2.6.2" />
+    <PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
+    <PackageReference Include="Microsoft.Xaml.Behaviors.Wpf" Version="1.1.135" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Resources\Icons\AddFile.png" />
+    <Resource Include="Resources\Icons\AddFolder.png" />
+    <Resource Include="Resources\Icons\AppIcon.ico" />
+    <Resource Include="Resources\Icons\AppIcon.png" />
+    <Resource Include="Resources\Icons\Check.png" />
+    <Resource Include="Resources\Icons\ClearFilter.png" />
+    <Resource Include="Resources\Icons\Remove.png" />
+    <Resource Include="Resources\Icons\Rename.png" />
+    <Resource Include="Resources\Icons\Uncheck.png" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Update="Resources\Strings.Designer.cs">
+      <DesignTime>True</DesignTime>
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Strings.resx</DependentUpon>
+    </Compile>
+	  <Compile Update="Resources\Strings.ru.Designer.cs">
+		  <DesignTime>True</DesignTime>
+		  <AutoGen>True</AutoGen>
+		  <DependentUpon>Strings.ru.resx</DependentUpon>
+	  </Compile>
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Update="Resources\Strings.resx">
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Strings.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+	<EmbeddedResource Update="Resources\Strings.ru.resx">
+		<Generator>PublicResXFileCodeGenerator</Generator>
+		<LastGenOutput>Strings.ru.Designer.cs</LastGenOutput>
+	</EmbeddedResource>
+  </ItemGroup>
+
+</Project>

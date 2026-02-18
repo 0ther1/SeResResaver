@@ -1,0 +1,39 @@
+﻿<Window x:Class="SeResResaver.Views.Dialogs.RenameFilesDialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:res="clr-namespace:SeResResaver.Resources"
+        xmlns:local="clr-namespace:SeResResaver"
+        mc:Ignorable="d"
+        Title="{x:Static res:Strings.RenameFilesDialog_Title}"
+        WindowStartupLocation="CenterOwner"
+        WindowStyle="SingleBorderWindow"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        SizeToContent="Height"
+        Width="600">
+    <Grid Margin="5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" TextWrapping="Wrap" Text="{x:Static res:Strings.RenameFilesDialog_Help}" Padding="5"/>
+
+        <DataGrid x:Name="dataGridRules" Grid.Row="1" AutoGenerateColumns="False" CanUserResizeRows="False" MinHeight="200" HorizontalGridLinesBrush="#FF717171" VerticalGridLinesBrush="#FF717171">
+            <DataGrid.Columns>
+                <DataGridTextColumn Header="{x:Static res:Strings.RenameFilesDialog_Substring}" Binding="{Binding Substring}" MinWidth="150"/>
+                <DataGridTextColumn Header="{x:Static res:Strings.RenameFilesDialog_Replacement}" Binding="{Binding Replacement}" MinWidth="150"/>
+                <DataGridCheckBoxColumn Header="{x:Static res:Strings.RenameFilesDialog_Regex}" Binding="{Binding IsRegex}"/>
+                <DataGridCheckBoxColumn Header="{x:Static res:Strings.RenameFilesDialog_IgnoreCase}" Binding="{Binding IgnoreCase}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <StackPanel Grid.Row="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="5">
+            <Button Content="{x:Static res:Strings.Common_OK}" MinWidth="70" Padding="10,3" Margin="5,0" IsDefault="True" Click="OnOKClick"/>
+            <Button Content="{x:Static res:Strings.Common_Cancel}" MinWidth="70" Padding="10,3" Margin="5,0" IsCancel="True"/>
+        </StackPanel>
+    </Grid>
+</Window>

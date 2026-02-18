@@ -1,0 +1,85 @@
+﻿<Page x:Class="SeResResaver.Views.Pages.ResaveFilesPage"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:i="http://schemas.microsoft.com/xaml/behaviors"
+      xmlns:res="clr-namespace:SeResResaver.Resources"
+      xmlns:local="clr-namespace:SeResResaver"
+      xmlns:b="clr-namespace:SeResResaver.Behaviors"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <TextBlock Grid.Row="0" Padding="5" Text="{x:Static res:Strings.ResaveFilesPage_Help}" TextWrapping="Wrap"/>
+
+        <Grid Grid.Row="1" Margin="5">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <Label Grid.Row="0" VerticalAlignment="Center" Content="{x:Static res:Strings.ResaveFilesPage_GameDir}"/>
+
+            <TextBox Grid.Column="1" VerticalAlignment="Center" Padding="0,3" Margin="5,0" Text="{Binding GameDir}" IsReadOnly="True"/>
+
+            <Button Grid.Column="2" MinWidth="70" Padding="10,3" Command="{Binding BrowseGameDirCommand}" Content="{x:Static res:Strings.Common_Browse}"/>
+
+        </Grid>
+
+        <ToolBar Grid.Row="2">
+            <Button Command="{Binding AddFilesCommand}" ToolTip="{x:Static res:Strings.Common_AddFiles}">
+                <Image Source="{StaticResource AddFileIcon}" Width="20" Height="20" Style="{StaticResource ButtonImageStyle}"/>
+            </Button>
+            <Button Command="{Binding AddFolderCommand}" ToolTip="{x:Static res:Strings.Common_AddFolders}">
+                <Image Source="{StaticResource AddFolderIcon}" Width="20" Height="20" Style="{StaticResource ButtonImageStyle}"/>
+            </Button>
+            <Button Command="{Binding RemoveFilesCommand}" ToolTip="{x:Static res:Strings.Common_RemoveFiles}">
+                <Image Source="{StaticResource RemoveIcon}" Width="20" Height="20" Style="{StaticResource ButtonImageStyle}"/>
+            </Button>
+
+            <Separator/>
+
+            <Button Command="{Binding RenameFilesCommand}" ToolTip="{x:Static res:Strings.ResaveFilesPage_RenameFiles}">
+                <Image Source="{StaticResource RenameIcon}" Width="20" Height="20" Style="{StaticResource ButtonImageStyle}"/>
+            </Button>
+            <Button Command="{Binding CheckAllCommand}" ToolTip="{x:Static res:Strings.ResaveFilesPage_CheckSelected}">
+                <Image Source="{StaticResource CheckIcon}" Width="20" Height="20" Style="{StaticResource ButtonImageStyle}"/>
+            </Button>
+            <Button Command="{Binding UncheckAllCommand}" ToolTip="{x:Static res:Strings.ResaveFilesPage_UncheckSelected}">
+                <Image Source="{StaticResource UncheckIcon}" Width="20" Height="20" Style="{StaticResource ButtonImageStyle}"/>
+            </Button>
+
+            <Separator/>
+
+            <Label Content="{x:Static res:Strings.Common_Filter}"/>
+            <TextBox MinWidth="200" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Command="{Binding ClearFilterCommand}" ToolTip="{x:Static res:Strings.Common_Clear}">
+                <Image Source="{StaticResource ClearFilterIcon}" Width="20" Height="20" Style="{StaticResource ButtonImageStyle}"/>
+            </Button>
+
+        </ToolBar>
+
+        <DataGrid x:Name="dataGridFiles" Grid.Row="3" ItemsSource="{Binding Files}" AutoGenerateColumns="False" CanUserAddRows="False" CanUserDeleteRows="False" CanUserResizeRows="False" SelectionMode="Extended" HorizontalGridLinesBrush="#FF717171" VerticalGridLinesBrush="#FF717171">
+            <i:Interaction.Behaviors>
+                <b:BindableDataGridSelectedItemsBehavior SelectedItems="{Binding SelectedItems}" ViewModel="{Binding}"/>
+            </i:Interaction.Behaviors>
+            <DataGrid.Columns>
+                <DataGridTextColumn IsReadOnly="True" Header="{x:Static res:Strings.ResaveFilesPage_Name}" Binding="{Binding OldPath}"/>
+                <DataGridTextColumn Header="{x:Static res:Strings.ResaveFilesPage_NewName}" Binding="{Binding NewPath}"/>
+                <DataGridCheckBoxColumn Header="{x:Static res:Strings.ResaveFilesPage_DeleteOriginal}" Binding="{Binding DeleteOld}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button Grid.Row="4" HorizontalAlignment="Right" MinWidth="70" Margin="0,5" Padding="10,3" Click="OnNextClick" Content="{x:Static res:Strings.Common_Next}"/>
+
+    </Grid>
+</Page>

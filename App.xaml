@@ -1,0 +1,26 @@
+﻿<Application x:Class="SeResResaver.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:SeResResaver"
+             StartupUri="Views/MainWindow.xaml">
+    <Application.Resources>
+        <BitmapImage x:Key="AddFileIcon" UriSource="/Resources/Icons/AddFile.png"/>
+        <BitmapImage x:Key="AddFolderIcon" UriSource="/Resources/Icons/AddFolder.png"/>
+        <BitmapImage x:Key="CheckIcon" UriSource="/Resources/Icons/Check.png"/>
+        <BitmapImage x:Key="ClearFilterIcon" UriSource="/Resources/Icons/ClearFilter.png"/>
+        <BitmapImage x:Key="RemoveIcon" UriSource="/Resources/Icons/Remove.png"/>
+        <BitmapImage x:Key="RenameIcon" UriSource="/Resources/Icons/Rename.png"/>
+        <BitmapImage x:Key="UncheckIcon" UriSource="/Resources/Icons/Uncheck.png"/>
+        <Style x:Key="ButtonImageStyle" TargetType="Image">
+            <Setter Property="Opacity" Value="1"/>
+            <Style.Triggers>
+                <DataTrigger Binding="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Button}}, Path=IsEnabled}" Value="False">
+                    <Setter Property="Opacity" Value="0.5"/>
+                </DataTrigger>
+            </Style.Triggers>
+        </Style>
+        <Style TargetType="Window">
+            <Setter Property="Icon" Value="/Resources/Icons/AppIcon.ico"/>
+        </Style>
+    </Application.Resources>
+</Application>
