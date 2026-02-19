@@ -716,15 +716,12 @@ namespace SeResResaver.Core
 
         private void WriteHeader()
         {
-            using (BinaryWriter writer = new BinaryWriter(baseStream, Encoding.UTF8, true))
-            {
-                writer.Write(MAGIC);
+            baseStream.Write(BitConverter.GetBytes(MAGIC));
 
-                int blockSize = GenerateBlockSize();
-                blockSizes.Add(blockSize);
+            int blockSize = GenerateBlockSize();
+            blockSizes.Add(blockSize);
 
-                WriteBlockSize(blockSize);
-            }
+            WriteBlockSize(blockSize);
 
             dataStart = baseStream.Position;
         }
@@ -756,12 +753,9 @@ namespace SeResResaver.Core
             NUM1 = (NUM1 >> 1) | (((NUM1 ^ (8 * NUM1)) & 0xFFFFFFF8) << 28);
             NUM2 *= 1220703125;
 
-            using (BinaryWriter writer = new BinaryWriter(baseStream, Encoding.UTF8, true))
-            {
-                writer.Write(NUM1 ^ NUM2);
-                uint packed = BitOperations.RotateRight(1512 * (uint)blockSize + 662700032, 4);
-                writer.Write(packed);
-            }
+            baseStream.Write(BitConverter.GetBytes(NUM1 ^ NUM2));
+            uint packed = BitOperations.RotateRight(1512 * (uint)blockSize + 662700032, 4);
+            baseStream.Write(BitConverter.GetBytes(packed));
         }
     }
 }
