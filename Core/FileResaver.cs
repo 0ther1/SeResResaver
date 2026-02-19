@@ -43,10 +43,10 @@ namespace SeResResaver.Core
 
             string ext = Path.GetExtension(path).ToLower();
 
-            if (UseStreamWrecker && ext == ".wld")
-                s = StreamFactory.AddStreamWrecker(s);
             if (SignedStream != null && !PLAIN_FILE_EXTENSIONS.Contains(ext))
                 s = StreamFactory.AddSignedStream(s, SignedStream.Version, SignedStream.Key!);
+            if (UseStreamWrecker && ext == ".wld")
+                s = StreamFactory.AddStreamWrecker(s);
 
             return s;
         }
@@ -250,7 +250,7 @@ namespace SeResResaver.Core
             {
                 cancellationToken.ThrowIfCancellationRequested();
 
-                string tempPath = Path.GetTempPath() + Path.GetExtension(path);
+                string tempPath = Path.GetTempFileName() + Path.GetExtension(path);
                 try
                 {
                     using (Stream inStream = StreamFactory.OpenRead(path))

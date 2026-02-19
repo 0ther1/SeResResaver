@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Diagnostics;
+using System.IO;
 using System.Numerics;
 using System.Security.Cryptography;
 using System.Text;
@@ -286,7 +287,7 @@ namespace SeResResaver.Core
             block.Position = offset % blockSize;
 
             int signedBlockSize = blockSize + digestSize + signatureSize;
-            baseStream.Seek(dataStart + signatureSize * curBlock + block.Position, SeekOrigin.Begin);
+            baseStream.Seek(dataStart + signedBlockSize * curBlock + block.Position, SeekOrigin.Begin);
 
             return Position;
         }
@@ -562,7 +563,7 @@ namespace SeResResaver.Core
 
                 baseStream.Read(buffer, offset + bytesRead, toRead);
                 bytesRead += toRead;
-                blockPos += bytesRead;
+                blockPos += toRead;
 
                 if (blockPos >= blockSize)
                 {
@@ -595,6 +596,7 @@ namespace SeResResaver.Core
 
             long streamSize = 0;
             int blockSize;
+            curBlock = -1;
 
             for (int i = 0; i < blockSizes.Count; i++)
             {
@@ -608,6 +610,12 @@ namespace SeResResaver.Core
                 }
 
                 streamSize += blockSize;
+            }
+
+            if (curBlock == -1)
+            {
+                curBlock = blockSizes.Count-1;
+                blockPos = blockSizes[curBlock];
             }
 
             baseStream.Seek(dataStart + offset + 8 * curBlock, SeekOrigin.Begin);
@@ -650,7 +658,11 @@ namespace SeResResaver.Core
         protected override void Dispose(bool disposing)
         {
             if (disposing)
+            {
+                if (CanWrite)
+                    Flush();
                 baseStream.Dispose();
+            }
 
             base.Dispose(disposing);
         }

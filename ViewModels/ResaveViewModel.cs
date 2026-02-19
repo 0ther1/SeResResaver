@@ -68,7 +68,7 @@ namespace SeResResaver.ViewModels
         private Action<double> setTaskbarProgressValue;
         private Action<TaskbarItemProgressState> setTaskbarProgressState;
 
-        private bool CanGoBack => !IsWorking && !IsFinished;
+        public bool CanGoBack => !IsWorking && !IsFinished;
 
         public ResaveViewModel(FileResaver resaver, Action<double> setTaskbarProgressValue, Action<TaskbarItemProgressState> setTaskbarProgressState)
         {
@@ -126,7 +126,10 @@ namespace SeResResaver.ViewModels
                 Progress++;
                 setTaskbarProgressValue((double)Progress / MaxProgress);
                 if (Progress == MaxProgress && resaver.UpdateReferencesInFiles.Count > 0)
+                {
                     MaxProgress = resaver.UpdateReferencesInFiles.Count;
+                    Progress = 0;
+                }
                 else
                     Status = string.Format(Strings.ResavePage_StatusResaving, Progress + 1, MaxProgress);
             });
