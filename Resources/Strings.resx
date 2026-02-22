@@ -189,6 +189,9 @@
   <data name="ResaveFilesPage_CheckSelected" xml:space="preserve">
     <value>Check selected files</value>
   </data>
+  <data name="ResaveFilesPage_CopyHint" xml:space="preserve">
+    <value>Hint: double click Original name column cell to copy path</value>
+  </data>
   <data name="ResaveFilesPage_DeleteOriginal" xml:space="preserve">
     <value>Delete original</value>
   </data>

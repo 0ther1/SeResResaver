@@ -72,6 +72,9 @@
             <i:Interaction.Behaviors>
                 <b:BindableDataGridSelectedItemsBehavior SelectedItems="{Binding SelectedItems}" ViewModel="{Binding}"/>
             </i:Interaction.Behaviors>
+            <DataGrid.InputBindings>
+                <MouseBinding Gesture="LeftDoubleClick" Command="{Binding DataGridDoubleClickCommand}" CommandParameter="{Binding SelectedItem, ElementName=dataGridFiles}"/>
+            </DataGrid.InputBindings>
             <DataGrid.Columns>
                 <DataGridTextColumn IsReadOnly="True" Header="{x:Static res:Strings.ResaveFilesPage_Name}" Binding="{Binding OldPath}"/>
                 <DataGridTextColumn Header="{x:Static res:Strings.ResaveFilesPage_NewName}" Binding="{Binding NewPath}"/>
@@ -79,7 +82,16 @@
             </DataGrid.Columns>
         </DataGrid>
 
-        <Button Grid.Row="4" HorizontalAlignment="Right" MinWidth="70" Margin="0,5" Padding="10,3" Click="OnNextClick" Content="{x:Static res:Strings.Common_Next}"/>
+        <Grid Grid.Row="4">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Margin="5" Grid.Column="0" Text="{x:Static res:Strings.ResaveFilesPage_CopyHint}"/>
+
+            <Button Grid.Column="1" HorizontalAlignment="Right" MinWidth="70" Margin="0,5" Padding="10,3" Click="OnNextClick" Content="{x:Static res:Strings.Common_Next}"/>
+        </Grid>
 
     </Grid>
 </Page>

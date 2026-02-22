@@ -46,6 +46,7 @@ namespace SeResResaver.Views.Pages
             viewModel.Progress = 0;
             viewModel.MaxProgress = 1;
             viewModel.IsFinished = false;
+            viewModel.Errors.Clear();
         }
 
         private void OnBackClick(object sender, RoutedEventArgs e)

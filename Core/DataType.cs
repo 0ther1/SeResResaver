@@ -323,6 +323,16 @@
                     break;
             }
         }
+
+        public DataType? GetStructBase(string typeName)
+        {
+            if (Pointer != null)
+            {
+                if (Pointer.Name == typeName) return Pointer;
+                return Pointer.GetStructBase(typeName);
+            }
+            return null;
+        }
     }
 
     /// <summary>
@@ -340,7 +350,6 @@
             { "CMetaHandle", Skip_4bytes },
             { "CSyncedSLONG", Skip_4bytes },
             { "CTransString", Skip_TransString },
-            { "CBaseTexture", Skip_CBaseTexture },
         };
 
         public static void Skip_Sized(DataType dt, BinaryMetaParser parser)
@@ -463,18 +472,6 @@
             parser.Skip(4);
             parser.SkipString();
             parser.SkipString();
-        }
-
-        public static void Skip_CBaseTexture(DataType dt, BinaryMetaParser parser)
-        {
-            Skip_Struct(dt, parser);
-
-            if (dt.Format > 26)
-            {
-                parser.Skip(2);
-                int size = parser.ReadInt();
-                parser.Skip(size);
-            }
         }
 
         public static IEnumerable<bool> SkipToResourceLink_ResourceLink(DataType dt, BinaryMetaParser parser)

@@ -249,5 +249,28 @@ namespace SeResResaver.ViewModels
                 file.DeleteOld = false;
             }
         }
+
+        [RelayCommand]
+        private void DataGridDoubleClick(ResaveFileItemViewModel selectedItem)
+        {
+            if (dataGrid.SelectedItem != null)
+            {
+                var cellInfo = dataGrid.CurrentCell;
+                var column = cellInfo.Column as DataGridTextColumn;
+                var propertyName = (column!.Binding as Binding)?.Path.Path;
+
+                if (propertyName == "OldPath")
+                {
+                    try
+                    {
+                        Clipboard.SetText(selectedItem.OldPath);
+                    }
+                    catch
+                    {
+
+                    }
+                }
+            }
+        }
     }
 }

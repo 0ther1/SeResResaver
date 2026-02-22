@@ -262,6 +262,7 @@ namespace SeResResaver.Core
                         resaver.Resave(inStream, outStream, renames);
                     }
 
+                    File.Replace(tempPath, path, null);
                 }
                 catch (Exception ex)
                 {
@@ -274,8 +275,6 @@ namespace SeResResaver.Core
                 {
                     UpdateReferencesProgressUpdated?.Invoke(this, EventArgs.Empty);
                 }
-
-                File.Replace(tempPath, path, null);
             };
 
             try
@@ -300,7 +299,13 @@ namespace SeResResaver.Core
             foreach (var rf in ResaveFiles)
             {
                 if (rf.DeleteOld)
-                    File.Delete(Path.Combine(GameDir, rf.OldPath));
+                {
+                    try
+                    {
+                        File.Delete(Path.Combine(GameDir, rf.OldPath));
+                    }
+                    catch { }
+                }
             }
 
             Finished?.Invoke(this, EventArgs.Empty);

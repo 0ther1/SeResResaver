@@ -124,7 +124,6 @@ namespace SeResResaver.ViewModels
                 if (!IsWorking) return;
 
                 Progress++;
-                setTaskbarProgressValue((double)Progress / MaxProgress);
                 if (Progress == MaxProgress && resaver.UpdateReferencesInFiles.Count > 0)
                 {
                     MaxProgress = resaver.UpdateReferencesInFiles.Count;
@@ -132,6 +131,8 @@ namespace SeResResaver.ViewModels
                 }
                 else
                     Status = string.Format(Strings.ResavePage_StatusResaving, Progress + 1, MaxProgress);
+
+                setTaskbarProgressValue((double)Progress / MaxProgress);
             });
         }
 

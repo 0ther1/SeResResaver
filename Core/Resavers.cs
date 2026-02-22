@@ -342,6 +342,13 @@ namespace SeResResaver.Core
                     else
                     {
                         type.Skip(parser);
+                        DataType? baseTexture = type.GetStructBase("CBaseTexture");
+                        if (baseTexture?.Format > 26)
+                        {
+                            parser.Skip(2);
+                            int size = parser.ReadInt();
+                            parser.Skip(size);
+                        }
                     }
                 }
 

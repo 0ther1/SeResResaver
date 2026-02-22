@@ -189,6 +189,9 @@
   <data name="ResaveFilesPage_CheckSelected" xml:space="preserve">
     <value>Отметить выделенные файлы</value>
   </data>
+  <data name="ResaveFilesPage_CopyHint" xml:space="preserve">
+    <value>Подсказка: дважды кликните по ячейке в колонке Оригинальное имя чтобы скопировать путь</value>
+  </data>
   <data name="ResaveFilesPage_DeleteOriginal" xml:space="preserve">
     <value>Удалить оригинал</value>
   </data>

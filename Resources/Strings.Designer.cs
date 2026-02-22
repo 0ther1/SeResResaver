@@ -277,6 +277,15 @@ namespace SeResResaver.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Hint: double click Original name column cell to copy path.
+        /// </summary>
+        public static string ResaveFilesPage_CopyHint {
+            get {
+                return ResourceManager.GetString("ResaveFilesPage_CopyHint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Delete original.
         /// </summary>
         public static string ResaveFilesPage_DeleteOriginal {
